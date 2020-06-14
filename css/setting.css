@@ -1,0 +1,52 @@
+:root {
+  --white: white;
+  --primary-color:#ed6950;
+  --secondary-color:#ffc74a;
+  --gray-bg:#f8f9fb;
+  --wrapper: 192rem;
+  --container: 120rem;
+  --primary-font: 'Montserrat', sans-serif;
+  --gray-text:#4a4b4b;
+  --white:white;
+  --button-yellow-text:#b98000;
+  --button-white-text:#bdc8d9;
+  --white-link-text: #8d97a5;
+  --main-text-color: #606f81;
+  --black: black;
+}
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+body {
+  font-family: var(--primary-font);
+}
+img {
+  display: block;
+  max-width: 100%;
+  pointer-events: none;
+}
+a {
+  display: block;
+  text-decoration: none;
+}
+.wrapper {
+  max-width: var(--wrapper);
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+}
+
+.container {
+  max-width: var(--container);
+  margin-left:auto;
+  margin-right:auto;
+  padding-left:1.5rem;
+  padding-right:1.5rem;
+}
+
