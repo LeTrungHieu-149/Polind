@@ -184,8 +184,8 @@ function handleGesureForBigScreen() {
 }
 
 function handleGesureForTouchScreen() {
-  if(touchendX-touchstartX>30 && Math.abs(touchstartY-touchendY)<=20) plusSlides(-1);
-  else if(touchstartX-touchendX>30 && Math.abs(touchstartY-touchendY)<=20) plusSlides(1);
+  if(touchendX-touchstartX>30 && Math.abs(touchstartY-touchendY)<=40) plusSlides(-1);
+  else if(touchstartX-touchendX>30 && Math.abs(touchstartY-touchendY)<=40) plusSlides(1);
   else return;
 }
 
