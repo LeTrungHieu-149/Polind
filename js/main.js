@@ -160,8 +160,7 @@ gesuredZone.addEventListener('touchstart', function(event) {
 gesuredZone.addEventListener('touchend', function(event) {
   touchendX=event.changedTouches[0].clientX;
   touchendY=event.changedTouches[0].clientY;
-  if(event.changedTouches.length>1) return false;
-  handleGesure();
+  if(event.changedTouches.length==1) handleGesure();
 }); 
 
 gesuredZone.addEventListener('mousedown', function(event) {

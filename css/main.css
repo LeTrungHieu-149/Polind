@@ -144,7 +144,7 @@
 
 .header__content-heading {
     font-size: 9.2rem;
-    color: var(--secondary-color);
+    color: var(--primary-color);
     margin:0 auto;
     font-weight: bold;
 }
