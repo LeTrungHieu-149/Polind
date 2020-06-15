@@ -1,18 +1,14 @@
 //preloader
-function fadeAndHide(callback){
-  setTimeout(fade,2000);
-  callback();
-};
-
 function hideLoader() {
   document.querySelector(".loader").style.display="none";
 };
 
-function fade() {
+function fade(callback) {
   document.querySelector(".loader").style.opacity="0";
+  setTimeout(callback,1000);
 }
 
-window.onload=fadeAndHide(hideLoader);
+window.onload=setTimeout(fade,3000,hideLoader);
 
 //mobile menu and search-box
 var menu=document.querySelector(".header__menu");
@@ -155,7 +151,6 @@ var gesuredZone = document.querySelector('.categories');
 gesuredZone.addEventListener('touchstart', function(event) {
   touchstartX = event.changedTouches[0].clientX;
   touchstartY = event.changedTouches[0].clientY;
-  numOfFingers=event.changedTouches.length;
 });
 
 gesuredZone.addEventListener('touchend', function(event) {
