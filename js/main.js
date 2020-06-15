@@ -157,12 +157,13 @@ gesuredZone.addEventListener('touchstart', function(event) {
   touchstartX = event.changedTouches[0].clientX;
   touchstartY = event.changedTouches[0].clientY;
   numOfFingers=event.changedTouches.length;
+  console.log(numOfFingers);
 });
 
 gesuredZone.addEventListener('touchend', function(event) {
   touchendX=event.changedTouches[0].clientX;
   touchendY=event.changedTouches[0].clientY;
-  if(numOfFingers==1) handleGesure();
+  if(numOfFingers==1) handleGesureForTouchScreen();
 }); 
 
 gesuredZone.addEventListener('mousedown', function(event) {
@@ -173,12 +174,18 @@ gesuredZone.addEventListener('mousedown', function(event) {
 gesuredZone.addEventListener('mouseup', function(event) {
   touchendX = event.clientX;
   touchendY = event.clientY;
-  handleGesure();
+  handleGesureForBigScreen();
 });
 
-function handleGesure() {
+function handleGesureForBigScreen() {
   if(touchendX-touchstartX>40) plusSlides(-1);
   else if(touchstartX-touchendX>40) plusSlides(1);
+  else return;
+}
+
+function handleGesureForTouchScreen() {
+  if(touchendX-touchstartX>30 && Math.abs(touchstartY-touchendY)<=20) plusSlides(-1);
+  else if(touchstartX-touchendX>30 && Math.abs(touchstartY-touchendY)<=20) plusSlides(1);
   else return;
 }
 
