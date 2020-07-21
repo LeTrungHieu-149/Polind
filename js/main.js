@@ -57,7 +57,11 @@ function scrollFunction() {
   
   var pendingElement=document.querySelectorAll(".pending");
   pendingElement.forEach(function(value){
-    if(value.getBoundingClientRect().top-500<=0) value.classList.add("reveal");
+    if(value.className.includes("to-top")){
+      if(value.getBoundingClientRect().top-650<=0) value.classList.add("reveal");
+    }
+    else if(value.getBoundingClientRect().top-500<=0) value.classList.add("reveal");
+    else return;
   })
 }
 
