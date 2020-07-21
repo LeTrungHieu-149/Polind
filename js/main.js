@@ -8,7 +8,7 @@ function fade(callback) {
   setTimeout(callback,1000);
 }
 
-window.onload=setTimeout(fade,3000,hideLoader);
+window.onload=setTimeout(fade,2000,hideLoader);
 
 //mobile menu and search-box
 var menu=document.querySelector(".header__menu");
@@ -49,10 +49,16 @@ function scrollFunction() {
     headerTop.style.top = "0";
   }
   prevScrollpos = currentScrollPos;
+  
   if(document.body.scrollTop>120 || document.documentElement.scrollTop>120) {
     this.scrollButton.style.display="block";
   }
   else this.scrollButton.style.display="none";
+  
+  var pendingElement=document.querySelectorAll(".pending");
+  pendingElement.forEach(function(value){
+    if(value.getBoundingClientRect().top-500<=0) value.classList.add("reveal");
+  })
 }
 
 //click out of menu mobile, hide menu
@@ -190,4 +196,3 @@ function scrollToTop() {
 
 var scrollButton = document.querySelector(".scroll-to-top");
 scrollButton.addEventListener("click",scrollToTop);
-

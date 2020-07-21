@@ -609,7 +609,7 @@
         width: calc(320% / 27);
     }
 
-    .btn {
+    .btn--medium {
         width: 70%;
     }
 }
@@ -847,6 +847,7 @@
     background-color: var(--gray-bg);
     padding: 6rem 0 10rem;
     overflow: hidden;
+    position: relative;
 }
 
 .explore-city__heading {
@@ -870,6 +871,8 @@
 .explore-city__info {
     width: 50%;
     padding-right: 3rem;
+    position: relative;
+    z-index: 1;
 }
 
 .explore-city__info-title {
@@ -891,7 +894,6 @@
 
 .explore-city__image {
     width: 45%;
-    position: relative;
 }
 
 .explore-city__img {
@@ -1090,4 +1092,28 @@
     color: var(--secondary-color);
     display: none;
     z-index: 100;
+}
+
+/* animation when scroll */
+
+.pending {
+    opacity: 0;
+    transition: all 0.5s;
+}
+
+.pending.to-right {
+    transform: translateX(-150px);
+}
+
+.pending.to-left {
+    transform: translateX(150px);
+}
+
+.pending.to-top {
+    transform: translateY(150px);
+}
+
+.pending.to-right.reveal, .pending.to-left.reveal, .pending.to-top.reveal {
+    opacity: 1;
+    transform: translate(0);
 }
