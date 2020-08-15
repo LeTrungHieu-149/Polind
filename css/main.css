@@ -165,6 +165,7 @@
     font-weight: bold;
     text-transform: uppercase;
     cursor: pointer;
+    transition: all 0.25s;
 }
 
 .btn:hover {
@@ -1103,10 +1104,12 @@
 
 .pending.to-right {
     transform: translateX(-150px);
+    transition-delay: 0.25s;
 }
 
 .pending.to-left {
     transform: translateX(150px);
+    transition-delay: 0.5s;
 }
 
 .pending.to-top {
