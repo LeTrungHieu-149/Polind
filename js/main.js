@@ -29,9 +29,30 @@ menuButton.addEventListener("click",function(){
   body.classList.toggle("no-scroll");
 })
 //scroll down hide menu
-var prevScrollpos = window.pageYOffset;
+var prevScrollPos = window.pageYOffset;
 
-window.onscroll = function() {scrollFunction()}; 
+function debounce(f,wait){
+  let timeOut=null;
+
+  return function(){
+    let args=arguments;
+    let context=this;
+
+    function later(){
+      f.apply(context,args);
+      clearTimeout(timeOut);
+    }
+
+    if(timeOut) {
+      clearTimeout(timeOut);
+      timeOut=setTimeout(later,wait);
+    }
+    else {
+      timeOut=setTimeout(later,wait);
+    }
+  }
+}
+window.addEventListener("scroll",debounce(scrollFunction,20)); 
 
 function scrollFunction() {
   if (window.pageYOffset > 105) {
@@ -43,12 +64,12 @@ function scrollFunction() {
   }
 
   var currentScrollPos = window.pageYOffset;
-  if (currentScrollPos>prevScrollpos && prevScrollpos>300) {
+  if (currentScrollPos>prevScrollPos && prevScrollPos>300) {
     headerTop.style.top = "-105px";
   } else {
     headerTop.style.top = "0";
   }
-  prevScrollpos = currentScrollPos;
+  prevScrollPos = currentScrollPos;
   
   if(document.body.scrollTop>120 || document.documentElement.scrollTop>120) {
     this.scrollButton.style.display="block";
@@ -75,123 +96,6 @@ window.addEventListener("click",function(event){
   }
 })
 
-//slide
-var slideNodeList=document.getElementsByClassName("categories__item");
-var slide=document.querySelector(".categories__inner");
-
-var index=0;
-var left=0;
-var biggestIndex=0;
-var step=0;
-
-var firstWindowWidth=window.innerWidth;
-if(firstWindowWidth<=480) {
-  biggestIndex=slideNodeList.length-1;
-  step=100;
-}
-else if(firstWindowWidth<=768) {
-  biggestIndex=slideNodeList.length-2;
-  step=52;
-}
-else if(firstWindowWidth<=1200) {
-  biggestIndex=slideNodeList.length-3;
-  step=34;
-}
-else {
-  biggestIndex=slideNodeList.length-5;
-  step=20.3125;
-}
-
-window.addEventListener("resize",function(){
-  var windowWidth=window.innerWidth;
-  if(windowWidth<=480) {
-    step=100;
-    biggestIndex=slideNodeList.length-1;
-  }
-  else if(windowWidth<=768) {
-    step=52;
-    biggestIndex=slideNodeList.length-2;
-  }
-  else if(windowWidth<=1200) {
-    step=34;
-    biggestIndex=slideNodeList.length-3;
-  }
-  else {
-    step=20.3125;
-    biggestIndex=slideNodeList.length-5;
-  }
-  if(index>biggestIndex) {
-    index=biggestIndex;
-  }
-  left=-index*step;
-  let y=left+"%";
-  slide.style.left=y;
-})
-
-function plusSlides(n){
-  if(index+n<=biggestIndex && index+n>=0) {
-    let x=left-step*n;
-    let y=x+"%";
-    slide.style.left=y;
-    left-=step*n;
-    index+=n;
-  }
-  else if(index+n>biggestIndex) {
-    index=0;
-    left=0;
-    slide.style.left="0";
-  }
-  else {
-    index=biggestIndex;
-    left=biggestIndex*-step;
-    let y=left+"%";
-    slide.style.left=y;
-  }
-}
-
-//swipe
-
-var touchstartX = 0;
-var touchstartY = 0;
-var touchendX = 0;
-var touchendY = 0;
-
-var gesuredZone = document.querySelector('.categories');
-
-gesuredZone.addEventListener('touchstart', function(event) {
-  touchstartX = event.changedTouches[0].clientX;
-  touchstartY = event.changedTouches[0].clientY;
-});
-
-gesuredZone.addEventListener('touchend', function(event) {
-  touchendX=event.changedTouches[0].clientX;
-  touchendY=event.changedTouches[0].clientY;
-  handleGesureForTouchScreen();
-}); 
-
-gesuredZone.addEventListener('mousedown', function(event) {
-  touchstartX = event.clientX;
-  touchstartY = event.clientY;
-});
-
-gesuredZone.addEventListener('mouseup', function(event) {
-  touchendX = event.clientX;
-  touchendY = event.clientY;
-  handleGesureForBigScreen();
-});
-
-function handleGesureForBigScreen() {
-  if(touchendX-touchstartX>40) plusSlides(-1);
-  else if(touchstartX-touchendX>40) plusSlides(1);
-  else return;
-}
-
-function handleGesureForTouchScreen() {
-  if(touchendX-touchstartX>30 && Math.abs(touchstartY-touchendY)<=40) plusSlides(-1);
-  else if(touchstartX-touchendX>30 && Math.abs(touchstartY-touchendY)<=40) plusSlides(1);
-  else return;
-}
-
 //scroll to top
 function scrollToTop() {
   document.body.scrollTop = 0;
@@ -200,3 +104,16 @@ function scrollToTop() {
 
 var scrollButton = document.querySelector(".scroll-to-top");
 scrollButton.addEventListener("click",scrollToTop);
+
+document.querySelector(".own-1").ownCarousel({
+  itemPerRow:5, 
+  itemWidth:19,
+  responsive: {
+      1000: [4, 24],
+      800: [3, 32],
+      600: [2, 49],
+      400: [1, 100]
+  },
+});
+
+handleResize();
